@@ -4,11 +4,13 @@ def create_database():
     conn = sqlite3.connect("sales.db")
     cursor = conn.cursor()
 
-    cursor.executescript("""create table if not exists customers(
+    cursor.executescript("""
+                         create table if not exists customers(
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
                          name text not null,
                          email text,
                         city text);
+                         
                          create table if not exists products(
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
                          name text not null,
@@ -20,6 +22,7 @@ def create_database():
                          customer_id integer,
                          order_date text,
                          FOREIGN KEY (customer_id) REFERENCES customers(id));
+                         
                          create table if not exists order_items(
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
                          order_id integer,
