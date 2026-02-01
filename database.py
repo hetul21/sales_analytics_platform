@@ -9,7 +9,7 @@ def create_database():
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
                          name text not null,
                          email text,
-                        city text);
+                         city text);
                          
                          create table if not exists products(
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,8 +27,8 @@ def create_database():
                          id INTEGER PRIMARY KEY AUTOINCREMENT,
                          order_id integer,
                          product_id integer,
-                         quantity intteger,
-                         FOREIGN KEY (order_id) REFERENCES orderS(id),
+                         quantity integer,
+                         FOREIGN KEY (order_id) REFERENCES orders(id),
                          FOREIGN KEY (product_id) REFERENCES products(id)
                          );
                          
