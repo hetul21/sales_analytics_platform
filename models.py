@@ -1,34 +1,33 @@
-from sqlalchemy import Integer, String, Float, ForeignKey, create_engine, column
+from sqlalchemy import Integer, String, Float, ForeignKey, Column
 from sqlalchemy.orm import declarative_base, relationship
 
-Base =  declarative_base()
+Base = declarative_base()
 
 class Customer(Base):
     __tablename__ = "customers"
 
-    id = column(Integer, primary_key = True)
-    name = column(String, nullable = False)
-    email = column(String)
-    city = column(String)
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    email = Column(String)
+    city = Column(String)
 
-    orders = relationship('Order', backpopulates = 'customers')
+    orders = relationship("Order", back_populates="customer")
+
 
 class Product(Base):
-
     __tablename__ = "products"
 
-    id  = column(Integer, primarykey = True)
-    name = column(String, nullable = False)
-    category = column(String)
-    price = column(Float, nullable=False)
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    category = Column(String)
+    price = Column(Float, nullable=False)
+
 
 class Order(Base):
     __tablename__ = "orders"
 
-    id = column(Integer, primarykey = True)
-    customer_id = column(Integer, ForeignKey(Customer.id))
-    order_date = column(String)
+    id = Column(Integer, primary_key=True)
+    customer_id = Column(Integer, ForeignKey("customers.id"))
+    order_date = Column(String)
 
     customer = relationship("Customer", back_populates="orders")
-
-
